@@ -40,7 +40,9 @@ export const resolvers = {
       return deletedProject;
     },
     deleteTask: async(_, {_id}) => {
-
+      const deletedTask = Task.findByIdAndDelete(_id);
+      if(!deletedTask) throw new Error("Task not found");
+      return deletedTask;
     },
   },
 };
