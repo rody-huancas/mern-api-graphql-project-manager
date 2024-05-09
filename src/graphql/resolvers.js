@@ -36,7 +36,7 @@ export const resolvers = {
     deleteProject: async(_, {_id}) => {
       const deletedProject = Project.findByIdAndDelete(_id);
       if(!deletedProject) throw new Error("Project not found");
-
+      await Task.deleteMany({projectId: deletedProject._id})
       return deletedProject;
     },
     deleteTask: async(_, {_id}) => {
